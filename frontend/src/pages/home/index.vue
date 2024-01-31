@@ -3,7 +3,7 @@ import Container from '@/layouts/Container/index.vue'
 import {ref} from 'vue'
 import {Search} from '@element-plus/icons-vue'
 
-const serchText =ref('')
+const searchText =ref('')
 
 
 </script>
@@ -26,7 +26,7 @@ const serchText =ref('')
       <!--        </template>-->
 
       <el-input
-          v-model="serchText"
+          v-model="searchText"
           placeholder="Please input"
           class="searchText"
           size="large"
