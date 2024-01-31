@@ -1,21 +1,10 @@
 <script setup>
 import Container from '../Container/index.vue'
-import {getItemListApi, getSpeciesApi, getTotalApi} from '@/services/modules/index.js'
+import {getItemListApi, getTotalApi} from '@/services/modules/index.js'
 import {useRouter} from 'vue-router';
 import {ref, onMounted} from 'vue'
 
-const data1 = ref([])
 const router = useRouter()
-onMounted(async () => {
-
-
-  for (let i = 1; i <= 7; i++) {
-    const res = await getSpeciesApi(); // 假设getSpeciesApi是一个异步函数来获取数据
-    data1.value.push(res);//为啥都是26
-  }
-
-  console.log(data1.value)
-})
 
 const handleClick = (name) => {
   router.push({name: 'listDisplay', params: {name}});
@@ -91,12 +80,10 @@ onMounted(() => {
   }
   .s-divider{
     .el-divider{
-
       margin-left: 30px;
       height: 100%;
     }
   }
-
 
 }
 </style>
