@@ -1,10 +1,5 @@
 
 import Request from '@/services/request/index.js';
-export function getSpeciesApi() {
-    return Request.get({
-        url: '/material/count/1',
-    });
-}
 
 
 export function getItemListApi() {
@@ -19,3 +14,30 @@ export function getTotalApi() {
     });
 }
 
+export function getMaterialTypeListApi() {
+    return Request.get({
+        url: '/materialtype/all',
+    });
+}
+
+export function getMaterialTypeListByIdApi(id) {
+    return Request.get({
+        url: `/material/type/${id}`,
+    });
+}
+
+export function getMaterialTotalApi(id) {
+    return Request.get({
+        url: `/material/count/${id}`,
+    });
+}
+
+export function getMaterialListPageApi(id ,page, size) {
+    return Request.post({
+        url: `/material/type/${id}`,
+        data: {
+            page: page,
+            size: size
+        }
+    });
+}
