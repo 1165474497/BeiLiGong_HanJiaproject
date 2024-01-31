@@ -66,7 +66,7 @@ public class MaterialServiceImpl implements MaterialService {
             Integer typeId = materialTypeEntity.getId();
             String type = materialTypeEntity.getMaterial_type();
             Integer count = materialMapper.getMaterialCountByTypeID(typeId);
-            KeyValueModel keyValueModel = new KeyValueModel(type, String.valueOf(count));
+            KeyValueModel keyValueModel = new KeyValueModel(materialTypeEntity.getId(),type, String.valueOf(count));
             keyValueModelList.add(keyValueModel);
         }
         return keyValueModelList;

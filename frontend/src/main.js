@@ -10,4 +10,4 @@ const app = createApp(App);
 
 app.use(router)
 app.use(pinia).mount('#app');
-document.title = 'XXX';
+document.title = '氟材料数据展示';

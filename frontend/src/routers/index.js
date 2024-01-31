@@ -3,23 +3,21 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 const routes = [
     {
         path: '/',
-        component: () => import('@/pages/layout.vue'),
+        name: 'HomeLayout',
+        component: () => import('@/layouts/HomeLayout.vue'),
         children: [
             {
                 path: '/',
-                name: 'index',
+                name: 'HomePage',
                 component: () => import('@/pages/home/index.vue'),
+            },{
+                path: '/materialList/:id',
+                name: 'MaterialListPage',
+                component: () => import('@/pages/chemistryList/index.vue'),
             }
         ]
     },
-    {
-        path: '/listDisplay/:name',
-        name: 'listDisplay',
-        component: () => import('@/pages/home/listDisplay.vue'),
-        meta: {
-            name: '列表展示'
-        }
-    },
+
     {
         path: '/:pathMatch(.*)*',
         component: () => import('@/pages/404/index.vue'),
