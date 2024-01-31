@@ -47,21 +47,17 @@ onMounted(() => {
   <div class="foot">
     <Container>
       <div class="foot-container">
-        <div class="textarea" v-for="item in data.children" :key="item.name" @click="handleClick(item.name)">
-
-
-          <div class="text">{{ item.value }}</div>
-          <div class="name">{{ item.name }}</div>
-
-
+        <div v-for="item in data.children" class="statistics">
+          <div class="s-value">{{ item.value }}</div>
+          <div class="s-name">{{ item.name }}</div>
         </div>
-
-        <div class="totalTextarea">
-          <div class="text">{{ data.total }}</div>
-          <div class="name">总体</div>
+        <div class="s-divider">
+          <el-divider border-style="solid" direction="vertical"></el-divider>
         </div>
-
-
+        <div class="statistics">
+          <div class="s-value">{{data.total}}</div>
+          <div class="s-name">总计</div>
+        </div>
       </div>
     </Container>
   </div>
@@ -75,74 +71,30 @@ onMounted(() => {
 
 .foot-container {
 
-  height: 120px;
-  display: flex;
-  justify-content: left;
-  align-content: center;
+  height: 80px;
+  display: grid;
+  grid: repeat(1, 1fr) / repeat(8, 1fr);
 
-
-  .textarea {
-
+  .statistics {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-
-    margin-right: 2em;
-
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Source Sans Pro", sans-serif;
-
-    cursor: pointer;
-
-    .text {
-      font-weight: 200;
-      font-size: 3em;
-      line-height: 2em;
-
-
+    justify-content: flex-start;
+    .s-name{
+      margin-left: 5px;
+      margin-top: 15px;
     }
-
-    .name {
-      font-size: 1em;
-      padding-left: 0.5em;
-      line-height: 2em;
+    .s-value{
+      font-size: 36px;
+      font-family: "Calibri Light",serif;
     }
-
   }
+  .s-divider{
+    .el-divider{
 
-
-  .totalTextarea {
-    margin-left: auto; /* 靠右，自动占据剩余空间 */
-    display: flex;
-    justify-content: right;
-    flex-direction: row;
-    align-items: baseline;
-
-
-    padding-right: 2em;
-
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Source Sans Pro", sans-serif;
-
-    .text {
-      font-weight: 200;
-      font-size: 3em;
-      line-height: 2em;
+      margin-left: 30px;
+      height: 100%;
     }
-
-    .name {
-      font-size: 1em;
-      padding-left: 0.5em;
-      line-height: 2em;
-    }
-
-
-    &::before {
-      content: "";
-      width: 1px;
-      height: 60px;
-      background-color: #ccc; /* 灰色 */
-      margin-right: 25px; /* 左边距离 */
-    }
-
   }
 
 
