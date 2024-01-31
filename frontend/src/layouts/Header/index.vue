@@ -1,24 +1,6 @@
 <script setup>
 import Container from '../Container/index.vue'
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: '首页',
-//   },
-//   {
-//     path: '/persons',
-//     name: '人员列表',
-//   },
-//   {
-//     path: '/institution',
-//     name: '机构列表',
-//   },
-//   {
-//     path: '/paper_list',
-//     name: '论文列表',
-//   },
-// ]
 </script>
 
 <template>
@@ -31,16 +13,16 @@ import Container from '../Container/index.vue'
         <ul>
 
           <li class="iconStyle">
-            <img src="@/assets/logo.svg" alt="" style="width:100px; height:100px; padding-right: 20px">
-            <img src="@/assets/logo_02.svg" alt="" style="width:200px; height:100px; padding-right: 20px">
-<!--            <el-text style="justify-content: center; text-align: center;font-size: 24px">北京理工大学</el-text>-->
+            <img src="@/assets/logo.svg" alt="" style="width:60px;  padding-right: 20px">
+            <img src="@/assets/logo_02.svg" alt="" style=" height:50px; margin-top: 10px; padding-right: 20px">
+            <!--            <el-text style="justify-content: center; text-align: center;font-size: 24px">北京理工大学</el-text>-->
           </li>
 
-<!--          <li v-for="(route, index) in routes" :key="index" class="routeSelect">-->
-<!--            <router-link :to="route.path" active-class="active">-->
-<!--              {{ route.name }}-->
-<!--            </router-link>-->
-<!--          </li>-->
+          <!--          <li v-for="(route, index) in routes" :key="index" class="routeSelect">-->
+          <!--            <router-link :to="route.path" active-class="active">-->
+          <!--              {{ route.name }}-->
+          <!--            </router-link>-->
+          <!--          </li>-->
         </ul>
       </container>
 
@@ -53,7 +35,8 @@ import Container from '../Container/index.vue'
 
 
 nav {
-  background-color: rgb(241, 241, 241);
+  height: 100px;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .3);
 }
 
@@ -65,7 +48,7 @@ nav ul {
 
 nav ul li {
   color: black;
-  width: 120px;
+  width: 80px;
   display: flex;
   cursor: pointer;
 }
