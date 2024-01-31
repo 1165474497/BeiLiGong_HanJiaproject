@@ -1,7 +1,7 @@
 <script setup>
 import Container from '../Container/index.vue'
-import {getItemListApi, getSpeciesApi} from '@/services/modules/index.js'
-import { useRouter } from 'vue-router';
+import {getItemListApi, getSpeciesApi, getTotalApi} from '@/services/modules/index.js'
+import {useRouter} from 'vue-router';
 import {ref, onMounted} from 'vue'
 
 const data1 = ref([])
@@ -18,19 +18,28 @@ onMounted(async () => {
 })
 
 const handleClick = (name) => {
-  router.push({ name: 'listDisplay', params: { name }});
+  router.push({name: 'listDisplay', params: {name}});
 }
-const data = {
-  total: "116M",
+const data = ref({
+
+  total: "",
   children: []
-}
-let dataList = ref([])
+})
+
 async function getItemList() {
   const res = await getItemListApi();
-  dataList.value = res['data']
+  data.value.children = res['data']
 }
+
+async function getTotal() {
+  const res = await getTotalApi();
+  console.log(res)
+  data.value.total = res['data']
+}
+
 onMounted(() => {
   getItemList()
+  getTotal()
 })
 </script>
 
@@ -38,7 +47,7 @@ onMounted(() => {
   <div class="foot">
     <Container>
       <div class="foot-container">
-        <div class="textarea" v-for="item in dataList" :key="item.name" @click="handleClick(item.name)">
+        <div class="textarea" v-for="item in data.children" :key="item.name" @click="handleClick(item.name)">
 
 
           <div class="text">{{ item.value }}</div>
@@ -48,7 +57,6 @@ onMounted(() => {
         </div>
 
         <div class="totalTextarea">
-
           <div class="text">{{ data.total }}</div>
           <div class="name">总体</div>
         </div>
@@ -61,7 +69,7 @@ onMounted(() => {
 
 <style scoped>
 .foot {
-//background: url('@/assets/4.jpg') no-repeat center/150%; background-color: rgb(241, 241, 241); max-height: 150px; box-shadow: 0 -10px 20px rgba(0, 0, 0, .2);
+  //background: url('@/assets/4.jpg') no-repeat center/150%; background-color: rgb(241, 241, 241); max-height: 150px; box-shadow: 0 -10px 20px rgba(0, 0, 0, .2);
 
 }
 

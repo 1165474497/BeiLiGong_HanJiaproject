@@ -13,3 +13,9 @@ export function getItemListApi() {
     });
 }
 
+export function getTotalApi() {
+    return Request.get({
+        url: '/material/count',
+    });
+}
+
