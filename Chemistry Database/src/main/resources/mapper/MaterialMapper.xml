@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vrlab.chemistrydatabase.mapper.MaterialMapper">
+    <resultMap id="MaterialResultMapId" type="org.vrlab.chemistrydatabase.entity.MaterialEntity">
+        <id column="id" property="id" />
+        <result column="name_cn" property="name_cn"/>
+        <result column="name_zh" property="name_zh"/>
+        <result column="abbreviation" property="abbreviation"/>
+        <result column="cas" property="cas"/>
+        <result column="material_type_id" property="material_type_id"/>
+        <result column="molecular_formula" property="molecular_formula"/>
+        <result column="molecular_weight" property="molecular_weight"/>
+    </resultMap>
+    <select id="findAll" resultMap="MaterialResultMapId">
+        select * from cd_raw_material
+    </select>
+    <select id="findByTypeID" resultMap="MaterialResultMapId">
+        select * from cd_raw_material where material_type_id = #{typeId}
+    </select>
+
+    <select id="getMaterialCount" resultType="java.lang.Integer">
+        select count(*) from cd_raw_material
+    </select>
+
+    <select id="getMaterialCountByTypeID" resultType="java.lang.Integer">
+        select count(*) from cd_raw_material where material_type_id = #{typeId}
+    </select>
+
+    <select id="findAllPagination" resultMap="MaterialResultMapId">
+        select * from cd_raw_material limit #{offset}, #{limit}
+    </select>
+
+    <select id="findByTypeIDPagination" resultMap="MaterialResultMapId">
+        select * from cd_raw_material where material_type_id = #{typeId} limit #{offset}, #{limit}
+    </select>
+
+    <select id="search" resultMap="MaterialResultMapId">
+        select * from cd_raw_material where name_cn like #{keyword} or name_zh like #{keyword} or abbreviation like #{keyword} or cas like #{keyword} or molecular_formula like #{keyword}
+    </select>
+</mapper>

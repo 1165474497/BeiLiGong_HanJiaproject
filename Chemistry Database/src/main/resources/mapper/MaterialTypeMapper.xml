@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vrlab.chemistrydatabase.mapper.MaterialTypeMapper">
+    <resultMap id="MaterialTypeResuleMapId" type="org.vrlab.chemistrydatabase.entity.MaterialTypeEntity">
+        <id column="id" property="id" />
+        <result column="material_type" property="material_type"/>
+        <result column="describe" property="describe"/>
+    </resultMap>
+    <select id="findAll" resultMap="MaterialTypeResuleMapId">
+        select * from cd_material_type
+    </select>
+    <select id="findById" resultMap="MaterialTypeResuleMapId">
+        select * from cd_material_type where id = #{id}
+    </select>
+</mapper>
