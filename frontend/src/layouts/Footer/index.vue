@@ -1,6 +1,6 @@
 <script setup>
 import Container from '../Container/index.vue'
-import {getSpeciesApi} from '@/services/modules/index.js'
+import {getItemListApi, getSpeciesApi} from '@/services/modules/index.js'
 import { useRouter } from 'vue-router';
 import {ref, onMounted} from 'vue'
 
@@ -22,39 +22,23 @@ const handleClick = (name) => {
 }
 const data = {
   total: "116M",
-  children: [
-    {
-      name: '单体',
-      value: '116M'
-    },
-    {
-      name: '硫化点单体',
-      value: '116M'
-    },
-    {
-      name: '链转移剂', value: '116M'
-    },
-    {
-      name: '表面活性剂',
-      value: '116M'
-    },
-    {
-      name: 'pH调节剂', value: '116M'
-    },
-    {
-      name: '引发剂',
-      value: '116M'
-    }
-  ]
+  children: []
 }
-
+let dataList = ref([])
+async function getItemList() {
+  const res = await getItemListApi();
+  dataList.value = res['data']
+}
+onMounted(() => {
+  getItemList()
+})
 </script>
 
 <template>
   <div class="foot">
     <Container>
       <div class="foot-container">
-        <div class="textarea" v-for="item in data.children" :key="item.name" @click="handleClick(item.name)">
+        <div class="textarea" v-for="item in dataList" :key="item.name" @click="handleClick(item.name)">
 
 
           <div class="text">{{ item.value }}</div>

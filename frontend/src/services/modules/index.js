@@ -7,5 +7,9 @@ export function getSpeciesApi() {
 }
 
 
-
+export function getItemListApi() {
+    return Request.get({
+        url: '/material/count/list',
+    });
+}
 
