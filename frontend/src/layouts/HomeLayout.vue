@@ -51,9 +51,11 @@ onMounted(()=>{
   .main{
     height: Calc(100vh - 80px);
     overflow: auto;
+
+    background: linear-gradient(to bottom, rgba(108, 129, 154, 0.5),rgba(17,46,81,.5)),url("@/assets/indexPic/background.png"),linear-gradient(to bottom,#20558a, #5c7b9f);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: url("@/assets/indexPic/background.png");
+    background-position: center;
 
   }
 }

@@ -21,6 +21,12 @@ let typeList = defineModel()
     .el-card{
       width: 30%;
       margin-top: 20px;
+      border: 5px dashed #fff;
+      padding: 20px;
+      background-color: #d6d7d9;
+      font-weight: bold;
+
+      transition: background-color 1s;
       .el-card__header{
         font-size: 20px;
       }
@@ -30,7 +36,15 @@ let typeList = defineModel()
       .el-button{
         font-size: 17px;
         margin-top: 10px;
+
       }
+      &:hover {
+        background-color: #fff;
+
+      }
+
     }
+
+
   }
 </style>
