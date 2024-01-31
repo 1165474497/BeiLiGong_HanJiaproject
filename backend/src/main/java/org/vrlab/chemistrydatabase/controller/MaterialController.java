@@ -64,6 +64,11 @@ public class MaterialController {
         return Result.success(materialService.getMaterialCountByTypeID(id), "查询成功");
     }
 
+    @GetMapping("/count/list")
+    private Result getMaterialCountList() {
+        return Result.success(materialService.getMaterialTypeCount(), "查询成功");
+    }
+
     @PostMapping("/all")
     private Result findAllPagination(@RequestBody Map<String, Integer> data) {
         Integer page = data.get("page");
