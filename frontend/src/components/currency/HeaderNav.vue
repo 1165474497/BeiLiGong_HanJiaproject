@@ -1,5 +1,6 @@
 <script setup>
 import { ref,computed } from 'vue'
+import router from "@/routers/index.js";
 let logoText = ref('氟材料展示平台')
 let typeList = defineModel()
 </script>
@@ -10,8 +11,8 @@ let typeList = defineModel()
       class="menu-nav"
       mode="horizontal"
       :ellipsis="false">
-    <img class="logo-img" src="@/assets/logo_01.png" alt="logo"/>
-    <span class="logo-text">{{ logoText }}</span>
+    <img @click="router.push('/')" class="logo-img" src="@/assets/logo_01.png" alt="logo"/>
+    <span @click="router.push('/')" class="logo-text">{{ logoText }}</span>
     <div class="flex-grow"/>
     <el-menu-item route="/" index="1">首页</el-menu-item>
     <el-sub-menu index="2">
@@ -38,6 +39,7 @@ let typeList = defineModel()
   }
 }
 .logo-text{
+  font-weight: bolder;
   margin-top: 20px;
   font-size: 30px;
   margin-left: 10px;

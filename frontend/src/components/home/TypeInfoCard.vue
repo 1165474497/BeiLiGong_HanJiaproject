@@ -6,7 +6,7 @@ let typeList = defineModel()
 
 <template>
   <div class="type-info-card">
-    <el-card v-for="item in typeList" :header="item.name">
+    <el-card @click="router.push(`/materialList/${item.id}`)" v-for="item in typeList" :header="item.name">
       <el-statistic :value="Number(item.value)" ></el-statistic>
       <el-button @click="router.push(`/materialList/${item.id}`)" link>查看详情</el-button>
     </el-card>
@@ -21,9 +21,9 @@ let typeList = defineModel()
     .el-card{
       width: 30%;
       margin-top: 20px;
-      border: 5px dashed #fff;
+      border: 5px solid #e6e1e1;
       padding: 20px;
-      background-color: #d6d7d9;
+      background-color: #ffffff;
       font-weight: bold;
 
       transition: background-color 1s;
@@ -39,7 +39,7 @@ let typeList = defineModel()
 
       }
       &:hover {
-        background-color: #fff;
+        background-color: #e6e1e1;
 
       }
 

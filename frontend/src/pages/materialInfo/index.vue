@@ -58,7 +58,7 @@ onMounted(() => {
         <div  v-loading="loading" class="material-info">
 
           <el-descriptions v-if="data!==null" border :column="1">
-            <el-descriptions-item v-for="(v) in data" :label="v['name']">
+            <el-descriptions-item v-for="(v,k) in data" :label="v['name']+'('+k+')'">
               <span style="width: 100%" v-for="i in v['value']">{{i}}</span>
             </el-descriptions-item>
           </el-descriptions>
@@ -66,6 +66,7 @@ onMounted(() => {
         </div>
       </el-main>
     </el-container>
+    <br>
   </el-scrollbar>
 
 </template>
@@ -75,7 +76,7 @@ onMounted(() => {
   width: 90%;
   margin: auto;
   border-radius: 5px;
-  padding: 5px;
+  border: rgb(2,191,231) solid 5px;
   background-color: rgba(255, 255, 255, 0.8);
   .el-descriptions__label{
     font-weight: bold;
