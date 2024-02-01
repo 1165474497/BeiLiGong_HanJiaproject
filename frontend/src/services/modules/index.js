@@ -52,3 +52,9 @@ export function getMaterialListPageBySearchApi(key ,page, size) {
         }
     });
 }
+
+export function getMaterialInfoApi(cas) {
+    return Request.get({
+        url: `/material/data/${cas}`,
+    });
+}

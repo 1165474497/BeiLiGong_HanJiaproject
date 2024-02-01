@@ -97,9 +97,8 @@ public class MaterialController {
         return Result.success(convertToMaterialResultEntityList(materialService.searchPagination(keyword, page, size)),String.valueOf( materialService.getSearchedMaterialCount(keyword)));
     }
 
-    @GetMapping("/data")
-    private Result getMaterialData(@RequestBody Map<String,String> data) {
-        String cas = data.get("cas");
+    @GetMapping("/data/{cas}")
+    private Result getMaterialData(@PathVariable String cas) {
         return Result.success(MaterialDataUtils.getMaterialData(cas), "查询成功");
     }
 }

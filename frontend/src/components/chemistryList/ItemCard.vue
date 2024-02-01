@@ -27,7 +27,7 @@ import {BASE_URL} from "@/services/request/config.js";
           <el-descriptions-item label="分子式:">{{item['molecular_formula']}}</el-descriptions-item>
           <el-descriptions-item label="分子量:">{{item['molecular_weight']}}</el-descriptions-item>
         </el-descriptions>
-        <el-button link @click="router.push(`/material/${item.id}`)">查看更多</el-button>
+        <el-button  link @click="router.push(`/material/${item['cas']}`)">查看更多</el-button>
       </div>
 
     </div>

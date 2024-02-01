@@ -18,6 +18,10 @@ const routes = [
             path: '/materialSearch/:key',
             name: 'MaterialSearchPage',
             component: () => import('@/pages/chemistryList/index.vue'),
+            },{
+            path: '/material/:cas',
+            name: 'MaterialPage',
+                component: () => import('@/pages/materialInfo/index.vue'),
             }
         ]
     },
