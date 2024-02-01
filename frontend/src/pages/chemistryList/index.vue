@@ -144,7 +144,7 @@ let itemList = defineModel('itemList');
                 <el-form-item label="搜索材料...">
                   <el-input v-model="search" placeholder="请输入关键词">
                     <template #append>
-                      <el-button @click="handleSearch" :icon="Search" style="width: 60px"></el-button>
+                      <el-button @keydown.enter="handleSearch" @click="handleSearch" :icon="Search" style="width: 60px"></el-button>
                     </template>
                   </el-input>
                 </el-form-item>
