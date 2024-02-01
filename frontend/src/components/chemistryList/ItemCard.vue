@@ -15,6 +15,7 @@ import {BASE_URL} from "@/services/request/config.js";
         <el-descriptions
           :bordered="true"
           :column="1"
+          @click="router.push(`/material/${item['cas']}`)"
           :title="item['name_cn']"
         >
           <template #title>

@@ -104,52 +104,74 @@ watch(typeId, () => {
   getChemistryList()
   getMaterialTotal(typeId.value)
 })
+
 async function getMaterialListBySearch() {
   let res = await getMaterialListPageBySearchApi(search.value, page.value, pageSize.value);
   total.value = Number(res.message);
   isSearch.value = true;
   data.value.chemistryList = res.data;
 }
+
+let itemList = defineModel('itemList');
 </script>
 
 <template>
-  <el-scrollbar ref="scroll" class="chemistry-list">
-    <div class="search-input-background">
-      <div class="search-input">
-        <el-form label-position="top">
-          <el-form-item label="搜索材料...">
-            <el-input v-model="search" placeholder="请输入关键词">
-              <template #append>
-                <el-button @click="handleSearch" :icon="Search" style="width: 60px"></el-button>
-              </template>
-            </el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
-    <div class="no-data" v-if="data.chemistryList.length===0">
-      <el-alert title="暂无数据，请更换材料种类或搜索关键词" type="error" :closable="false" show-icon/>
-    </div>
 
-    <div v-else class="total-show">
-      <el-text tag="b" style="text-align: center;margin-top: 20px ">
-        共{{ total }}条数据
-      </el-text>
+  <el-scrollbar>
 
-    </div>
-    <ItemCard v-model:itemList="data.chemistryList"></ItemCard>
-    <el-pagination
-        class="item-pagination"
-        v-model:current-page="page"
-        v-model:page-size="pageSize"
-        :page-sizes="[5, 10]"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :hide-on-single-page="true"
-    />
+    <el-container>
+
+      <el-main>
+        <div ref="scroll" class="chemistry-list">
+          <div class="search-input-background">
+            <div class="search-input">
+              <el-form label-position="top">
+                <el-form-item label="搜索材料...">
+                  <el-input v-model="search" placeholder="请输入关键词">
+                    <template #append>
+                      <el-button @click="handleSearch" :icon="Search" style="width: 60px"></el-button>
+                    </template>
+                  </el-input>
+                </el-form-item>
+              </el-form>
+            </div>
+          </div>
+          <div class="no-data" v-if="total===0">
+            <el-alert title="暂无数据，请更换材料种类或搜索关键词" type="error" :closable="false" show-icon/>
+          </div>
+
+          <div v-else class="total-show">
+            <el-text tag="b" style="text-align: center;margin-top: 20px ">
+              共{{ total }}条数据
+            </el-text>
+
+          </div>
+          <ItemCard v-model:itemList="data.chemistryList"></ItemCard>
+          <el-pagination
+              class="item-pagination"
+              v-model:current-page="page"
+              v-model:page-size="pageSize"
+              :page-sizes="[5, 10]"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :hide-on-single-page="true"
+          />
+          <br>
+        </div>
+      </el-main>
+      <el-aside class="aside-nav">
+        <el-card header="材料导航" style="margin-top: 20px">
+          <el-button size="large" style="margin-bottom: 5px" link v-for="i in itemList"
+                     @click="router.push(`/materialList/${i.id}`)">{{ i['name'] }}
+          </el-button>
+        </el-card>
+      </el-aside>
+    </el-container>
+
   </el-scrollbar>
+
 </template>
 
 <style>
@@ -173,10 +195,22 @@ async function getMaterialListBySearch() {
 
 }
 
+.aside-nav {
+  width: 20%;
+  margin-top: 20px;
+  margin-right: 10%;
+
+  .el-card__header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
 .chemistry-list {
+  border-radius: 5px;
   margin: auto;
-  width: 80%;
-  background-color: rgba(255, 255, 255, 0.8);
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.92);
 
   .search-input-background {
     width: 100%;
