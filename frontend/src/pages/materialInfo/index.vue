@@ -77,6 +77,9 @@ onMounted(() => {
   border-radius: 5px;
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
+  .el-descriptions__label{
+    font-weight: bold;
+  }
 }
 .aside-bar{
   width: 20%;
@@ -95,6 +98,9 @@ onMounted(() => {
     .el-button{
       margin-right: 10px;
     }
+  }
+  .el-descriptions__label{
+    font-weight: bold;
   }
 }
 </style>
