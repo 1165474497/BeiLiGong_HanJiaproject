@@ -37,4 +37,8 @@
     <select id="search" resultMap="MaterialResultMapId">
         select * from cd_raw_material where name_cn like #{keyword} or name_zh like #{keyword} or abbreviation like #{keyword} or cas like #{keyword} or molecular_formula like #{keyword}
     </select>
+
+    <select id="searchPagination" resultMap="MaterialResultMapId">
+        select * from cd_raw_material where name_cn like #{keyword} or name_zh like #{keyword} or abbreviation like #{keyword} or cas like #{keyword} or molecular_formula like #{keyword} limit #{offset}, #{limit}
+    </select>
 </mapper>

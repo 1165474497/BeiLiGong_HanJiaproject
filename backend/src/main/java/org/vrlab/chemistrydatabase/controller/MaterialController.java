@@ -89,6 +89,14 @@ public class MaterialController {
         return Result.success(convertToMaterialResultEntityList(materialService.search(keyword)), "查询成功");
     }
 
+    @PostMapping("/search/pagination")
+    private Result searchPagination(@RequestBody Map<String, Object> data) {
+        String keyword = (String) data.get("keyword");
+        Integer page = (Integer) data.get("page");
+        Integer size = (Integer) data.get("size");
+        return Result.success(convertToMaterialResultEntityList(materialService.searchPagination(keyword, page, size)), "查询成功");
+    }
+
     @GetMapping("/data")
     private Result getMaterialData(@RequestBody Map<String,String> data) {
         String cas = data.get("cas");

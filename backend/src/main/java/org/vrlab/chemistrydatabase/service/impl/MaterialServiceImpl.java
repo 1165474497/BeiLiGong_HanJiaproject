@@ -59,6 +59,13 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
+    public List<MaterialEntity> searchPagination(String keyword, Integer page, Integer size) {
+        Integer offset = (page - 1) * size;
+        keyword = "%" + keyword + "%";
+        return materialMapper.searchPagination(keyword, offset, size);
+    }
+
+    @Override
     public List<KeyValueModel> getMaterialTypeCount() {
         List<KeyValueModel> keyValueModelList = new ArrayList<>();
         List<MaterialTypeEntity> materialTypeEntityList = materialTypeMapper.findAll();

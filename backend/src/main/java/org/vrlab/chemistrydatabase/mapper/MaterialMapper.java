@@ -50,4 +50,5 @@ public interface MaterialMapper {
      * @return 材料列表
      */
     List<MaterialEntity> search(String keyword);
+    List<MaterialEntity> searchPagination(String keyword, Integer offset, Integer limit);
 }

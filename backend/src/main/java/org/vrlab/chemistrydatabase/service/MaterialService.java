@@ -13,5 +13,7 @@ public interface MaterialService {
     List<MaterialEntity> findAllPagination(Integer offset, Integer limit);
     List<MaterialEntity> findByTypeIDPagination(Integer typeId, Integer offset, Integer limit);
     List<MaterialEntity> search(String keyword);
+    List<MaterialEntity> searchPagination(String keyword, Integer offset, Integer limit);
     List<KeyValueModel> getMaterialTypeCount();
+
 }
