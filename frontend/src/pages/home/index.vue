@@ -7,8 +7,10 @@ let typeList = defineModel("itemList")
 
 <template>
   <div class="home">
-    <h1>氟材料数据展示平台</h1>
-    <TypeInfoCard class="type-info-card" v-model="typeList"></TypeInfoCard>
+    <el-scrollbar>
+      <h1>氟材料数据展示平台</h1>
+      <TypeInfoCard class="type-info-card" v-model="typeList"></TypeInfoCard>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -24,6 +26,9 @@ let typeList = defineModel("itemList")
     font-size: 50px;
     margin-top: 2%;
     color: #EEEEEE;
+  }
+  .el-scrollbar{
+    height: Calc(100vh - 80px);
   }
 }
 </style>
