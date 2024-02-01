@@ -56,11 +56,13 @@ onMounted(() => {
       </el-aside>
       <el-main>
         <div  v-loading="loading" class="material-info">
-          <el-descriptions border :column="1">
+
+          <el-descriptions v-if="data!==null" border :column="1">
             <el-descriptions-item v-for="(v) in data" :label="v['name']">
               <span style="width: 100%" v-for="i in v['value']">{{i}}</span>
             </el-descriptions-item>
           </el-descriptions>
+          <el-empty v-else description="暂无数据"></el-empty>
         </div>
       </el-main>
     </el-container>
