@@ -31,24 +31,29 @@ let page = ref(1);
 let pageSize = ref(5)
 let total = ref(1)
 let handleSizeChange = (val) => {
+  loading.value = true
   pageSize.value = val;
   if (isSearch.value) {
     getMaterialListBySearch()
   } else {
     getChemistryList()
   }
+  loading.value = false
 }
 let handleCurrentChange = (val) => {
+  loading.value = true
   page.value = val;
   if (isSearch.value) {
     getMaterialListBySearch()
   } else {
     getChemistryList()
   }
+  loading.value = false
 }
 
 // -------------- 分页处理 --------------
 onMounted(() => {
+  loading.value = true
   let basePath = path.split('/')[1];
   if ('materialList' === basePath) {
     search.value = '';
@@ -60,9 +65,10 @@ onMounted(() => {
     isSearch.value = true;
     search.value = params.key;
   }
+  loading.value = false
 })
 onBeforeRouteUpdate((to, from, next) => {
-  console.log(to)
+  loading.value = true
   let basePath = String(to.path).split('/')[1];
   if ('materialList' === basePath) {
     search.value = '';
@@ -73,8 +79,10 @@ onBeforeRouteUpdate((to, from, next) => {
     getMaterialListBySearch()
   }
   next()
+  loading.value = false
 })
 onBeforeRouteLeave((to, from, next) => {
+  loading.value = true
   let basePath = String(to.path).split('/')[1];
   if ('materialList' === basePath) {
     search.value = '';
@@ -85,6 +93,7 @@ onBeforeRouteLeave((to, from, next) => {
     getMaterialListBySearch()
   }
   next()
+  loading.value = false
 })
 // -------------- 搜索处理 --------------
 
@@ -97,19 +106,25 @@ let handleSearch = () => {
     })
     return;
   }
+  loading.value = true
   router.push(`/materialSearch/${search.value}`)
   getMaterialListBySearch()
+  loading.value = false
 }
 watch(typeId, () => {
+  loading.value = true
   getChemistryList()
   getMaterialTotal(typeId.value)
+  loading.value = false
 })
-
+let loading = ref(true)
 async function getMaterialListBySearch() {
+  loading.value = true
   let res = await getMaterialListPageBySearchApi(search.value, page.value, pageSize.value);
   total.value = Number(res.message);
   isSearch.value = true;
   data.value.chemistryList = res.data;
+  loading.value = false
 }
 
 let itemList = defineModel('itemList');
@@ -122,7 +137,7 @@ let itemList = defineModel('itemList');
     <el-container>
 
       <el-main>
-        <div ref="scroll" class="chemistry-list">
+        <div v-loading="loading" class="chemistry-list" >
           <div class="search-input-background">
             <div class="search-input">
               <el-form label-position="top">
@@ -136,35 +151,41 @@ let itemList = defineModel('itemList');
               </el-form>
             </div>
           </div>
-          <div class="no-data" v-if="total===0">
-            <el-empty description="暂无数据，请更换材料种类或搜索关键词"></el-empty>
-          </div>
+          <transition>
+            <div class="no-data" v-if="total===0">
+              <el-empty description="暂无数据，请更换材料种类或搜索关键词"></el-empty>
+            </div>
+          </transition>
+          <transition>
+            <div>
+              <div  v-if="total!==0" class="total-show">
+                <el-text tag="b" style="text-align: center;margin-top: 20px ">
+                  共{{ total }}条数据
+                </el-text>
 
-          <div v-else class="total-show">
-            <el-text tag="b" style="text-align: center;margin-top: 20px ">
-              共{{ total }}条数据
-            </el-text>
-
-          </div>
-          <ItemCard v-model:itemList="data.chemistryList"></ItemCard>
-          <el-pagination
-              class="item-pagination"
-              v-model:current-page="page"
-              v-model:page-size="pageSize"
-              :page-sizes="[5, 10]"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :hide-on-single-page="true"
-          />
+              </div>
+              <ItemCard v-model:itemList="data.chemistryList"></ItemCard>
+              <el-pagination
+                  class="item-pagination"
+                  v-model:current-page="page"
+                  v-model:page-size="pageSize"
+                  :page-sizes="[5, 10]"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="total"
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :hide-on-single-page="true"
+              />
+            </div>
+          </transition>
           <br>
         </div>
       </el-main>
       <el-aside class="aside-nav">
         <el-card header="材料导航" style="margin-top: 20px">
           <el-button size="large" style="margin-bottom: 5px" link v-for="i in itemList"
-                     @click="router.push(`/materialList/${i.id}`)">{{ i['name'] }}
+                     @click="router.push(`/materialList/${i.id}`)">
+            <el-tag>{{ i['name'] }}</el-tag>
           </el-button>
         </el-card>
       </el-aside>

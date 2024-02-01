@@ -19,10 +19,12 @@ async function getMaterialInfo() {
   data.value = res.data;
   console.log(data.value)
 }
-
+let loading = ref(true)
 onMounted(() => {
+  loading.value = true
   getMaterialInfo()
   getMaterial()
+  loading.value = false
 })
 </script>
 
@@ -30,7 +32,7 @@ onMounted(() => {
   <el-scrollbar>
     <el-container>
       <el-aside class="aside-bar">
-        <el-card :header="base_info['name_zh']">
+        <el-card  v-loading="loading" :header="base_info['name_zh']">
           <el-image  :src="BASE_URL+`/static/diagram/${cas}.png`" class="image" alt="" >
             <template #error>
               <el-empty :image-size="100" description="暂无图片"></el-empty>
@@ -46,12 +48,14 @@ onMounted(() => {
             </el-descriptions>
           </div>
         </el-card>
-        <el-card header="材料导航" style="margin-top: 20px">
-          <el-button size="large" style="margin-bottom: 5px" link v-for="i in itemList" @click="router.push(`/materialList/${i.id}`)">{{i['name']}}</el-button>
+        <el-card  v-loading="loading" header="材料导航" style="margin-top: 20px">
+          <el-button size="large" style="margin-bottom: 5px" link v-for="i in itemList" @click="router.push(`/materialList/${i.id}`)">
+            <el-tag>{{ i['name'] }}</el-tag>
+          </el-button>
         </el-card>
       </el-aside>
       <el-main>
-        <div class="material-info">
+        <div  v-loading="loading" class="material-info">
           <el-descriptions border :column="1">
             <el-descriptions-item v-for="(v) in data" :label="v['name']">
               <span style="width: 100%" v-for="i in v['value']">{{i}}</span>

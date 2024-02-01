@@ -3,6 +3,7 @@
 import HeaderNav from "@/components/currency/HeaderNav.vue";
 import {getItemListApi, getMaterialTypeListApi} from "@/services/modules/index.js";
 import {ref, onMounted} from "vue";
+import router from "@/routers/index.js";
 let data = ref({
   typeList: [],
   itemList: []
@@ -28,7 +29,11 @@ onMounted(()=>{
         <HeaderNav v-model="data.typeList"></HeaderNav>
       </el-header>
       <el-main class="main">
-        <router-view v-model:itemList="data.itemList"/>
+        <router-view v-model:itemList="data.itemList" v-slot="{ Component }">
+          <transition>
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </el-main>
     </el-container>
   </div>
