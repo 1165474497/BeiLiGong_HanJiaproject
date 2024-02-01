@@ -59,11 +59,10 @@ onBeforeRouteUpdate((to, from, next) => {
   if ('materialList' === basePath) {
     search.value = '';
     typeId.value = to.params.id;
-    // getChemistryList()
-    // getMaterialTotal(typeId.value)
   } else {
     isSearch.value = true;
     search.value = to.params.key;
+    getMaterialListBySearch()
   }
   next()
 })
@@ -72,11 +71,10 @@ onBeforeRouteLeave((to, from, next) => {
   if ('materialList' === basePath) {
     search.value = '';
     typeId.value = to.params.id;
-    // getChemistryList()
-    // getMaterialTotal(typeId.value)
   } else {
     isSearch.value = true;
     search.value = to.params.key;
+    getMaterialListBySearch()
   }
   next()
 })
@@ -92,6 +90,7 @@ let handleSearch = () => {
     return;
   }
   router.push(`/materialSearch/${search.value}`)
+  getMaterialListBySearch()
 }
 watch(typeId, () => {
   getChemistryList()
@@ -99,9 +98,9 @@ watch(typeId, () => {
 })
 async function getMaterialListBySearch() {
   let res = await getMaterialListPageBySearchApi(search.value, page.value, pageSize.value);
-  total.value = res.data;
+  total.value = Number(res.message);
   isSearch.value = true;
-  getChemistryList()
+  data.value.chemistryList = res.data;
 }
 </script>
 
