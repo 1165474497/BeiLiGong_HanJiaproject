@@ -32,11 +32,19 @@ let pageSize = ref(5)
 let total = ref(1)
 let handleSizeChange = (val) => {
   pageSize.value = val;
-  getChemistryList()
+  if (isSearch.value) {
+    getMaterialListBySearch()
+  } else {
+    getChemistryList()
+  }
 }
 let handleCurrentChange = (val) => {
   page.value = val;
-  getChemistryList()
+  if (isSearch.value) {
+    getMaterialListBySearch()
+  } else {
+    getChemistryList()
+  }
 }
 
 // -------------- 分页处理 --------------
