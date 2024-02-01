@@ -23,6 +23,7 @@ let typeList = defineModel("itemList")
     text-align: center;
     font-size: 50px;
     margin-top: 2%;
+    color: #EEEEEE;
   }
 }
 </style>

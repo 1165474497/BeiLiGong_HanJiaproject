@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BeiLiGong_HanJiaproject.iml" filepath="$PROJECT_DIR$/.idea/BeiLiGong_HanJiaproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chemistrydatabase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chemistrydatabase.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.vrlab.chemistrydatabase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.vrlab.chemistrydatabase.main.iml" />
     </modules>
   </component>
 </project>
