@@ -137,7 +137,7 @@ let itemList = defineModel('itemList');
             </div>
           </div>
           <div class="no-data" v-if="total===0">
-            <el-alert title="暂无数据，请更换材料种类或搜索关键词" type="error" :closable="false" show-icon/>
+            <el-empty description="暂无数据，请更换材料种类或搜索关键词"></el-empty>
           </div>
 
           <div v-else class="total-show">
@@ -262,10 +262,5 @@ let itemList = defineModel('itemList');
 .no-data {
   width: 60%;
   margin: 30px auto 20px auto;
-  height: 50px;
-
-  .el-alert {
-    height: 50px;
-  }
 }
 </style>

@@ -9,7 +9,12 @@ import {BASE_URL} from "@/services/request/config.js";
   <div class="item-list">
     <div class="item-list-card" v-for="item in data">
       <div class="item-image">
-        <el-image :src="BASE_URL+`/static/diagram/${item['cas']}.png`" fit="fill"></el-image>
+        <el-image :src="BASE_URL+`/static/diagram/${item['cas']}.png`" fit="fill">
+          <template #error>
+            <el-empty :image-size="100" description="暂无图片"></el-empty>
+          </template>
+        </el-image>
+
       </div>
       <div class="item-info">
         <el-descriptions
