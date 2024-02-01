@@ -44,7 +44,6 @@ import {BASE_URL} from "@/services/request/config.js";
   padding: 25px;
   justify-content: flex-start;
   .el-image{
-
     height: 200px;
   }
   .item-info{
