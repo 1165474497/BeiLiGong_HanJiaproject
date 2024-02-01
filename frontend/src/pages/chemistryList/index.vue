@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from "vue";
 import {onBeforeRouteUpdate, useRoute, onBeforeRouteLeave} from "vue-router";
-import {getMaterialListPageApi, getMaterialTotalApi} from "@/services/modules/index.js";
+import {getMaterialListPageApi, getMaterialListPageBySearchApi, getMaterialTotalApi} from "@/services/modules/index.js";
 import ItemCard from "@/components/chemistryList/ItemCard.vue";
 import {Search} from "@element-plus/icons-vue";
 import router from "@/routers/index.js";
@@ -97,7 +97,12 @@ watch(typeId, () => {
   getChemistryList()
   getMaterialTotal(typeId.value)
 })
-
+async function getMaterialListBySearch() {
+  let res = await getMaterialListPageBySearchApi(search.value, page.value, pageSize.value);
+  total.value = res.data;
+  isSearch.value = true;
+  getChemistryList()
+}
 </script>
 
 <template>

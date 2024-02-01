@@ -79,4 +79,10 @@ public class MaterialServiceImpl implements MaterialService {
         return keyValueModelList;
     }
 
+    @Override
+    public Integer getSearchedMaterialCount(String keyword) {
+        keyword = "%" + keyword + "%";
+        return materialMapper.getSearchedMaterialCount(keyword);
+    }
+
 }

@@ -15,5 +15,5 @@ public interface MaterialService {
     List<MaterialEntity> search(String keyword);
     List<MaterialEntity> searchPagination(String keyword, Integer offset, Integer limit);
     List<KeyValueModel> getMaterialTypeCount();
-
+    Integer getSearchedMaterialCount(String keyword);
 }

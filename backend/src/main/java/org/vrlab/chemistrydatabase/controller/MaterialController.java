@@ -94,7 +94,7 @@ public class MaterialController {
         String keyword = (String) data.get("keyword");
         Integer page = (Integer) data.get("page");
         Integer size = (Integer) data.get("size");
-        return Result.success(convertToMaterialResultEntityList(materialService.searchPagination(keyword, page, size)), "查询成功");
+        return Result.success(convertToMaterialResultEntityList(materialService.searchPagination(keyword, page, size)),String.valueOf( materialService.getSearchedMaterialCount(keyword)));
     }
 
     @GetMapping("/data")

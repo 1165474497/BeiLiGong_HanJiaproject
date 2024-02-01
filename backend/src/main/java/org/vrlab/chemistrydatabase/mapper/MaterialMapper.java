@@ -51,4 +51,5 @@ public interface MaterialMapper {
      */
     List<MaterialEntity> search(String keyword);
     List<MaterialEntity> searchPagination(String keyword, Integer offset, Integer limit);
+    Integer getSearchedMaterialCount(String keyword);
 }

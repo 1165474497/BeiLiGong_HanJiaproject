@@ -41,3 +41,14 @@ export function getMaterialListPageApi(id ,page, size) {
         }
     });
 }
+
+export function getMaterialListPageBySearchApi(key ,page, size) {
+    return Request.post({
+        url: `/material/search/pagination`,
+        data: {
+            keyword: key,
+            page: page,
+            size: size
+        }
+    });
+}
