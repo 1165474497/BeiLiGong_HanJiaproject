@@ -31,7 +31,11 @@ onMounted(() => {
     <el-container>
       <el-aside class="aside-bar">
         <el-card :header="base_info['name_zh']">
-          <el-image  :src="BASE_URL+`/static/diagram/${cas}.png`" class="image" alt="" />
+          <el-image  :src="BASE_URL+`/static/diagram/${cas}.png`" class="image" alt="" >
+            <template #error>
+              <el-empty :image-size="100" description="暂无图片"></el-empty>
+            </template>
+          </el-image>
           <div class="bottom clearfix">
             <el-descriptions :column="1">
               <el-descriptions-item label="CAS号:">{{base_info['cas']}}</el-descriptions-item>
