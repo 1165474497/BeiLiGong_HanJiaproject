@@ -20,11 +20,11 @@ import {BASE_URL} from "@/services/request/config.js";
         <el-descriptions
           :bordered="true"
           :column="1"
-          @click="router.push(`/material/${item['cas']}`)"
+
           :title="item['name_cn']"
         >
           <template #title>
-            <span class="custom-title-style">{{ item['name_cn'] }}</span>
+            <span class="custom-title-style"       @click="router.push(`/material/${item['cas']}`)">{{ item['name_cn'] }}</span>
           </template>
           <el-descriptions-item label="名称:">{{item['name_zh']}}</el-descriptions-item>
           <el-descriptions-item label="CAS号:">{{item['cas']}}</el-descriptions-item>

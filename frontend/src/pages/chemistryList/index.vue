@@ -98,18 +98,33 @@ onBeforeRouteLeave((to, from, next) => {
 // -------------- 搜索处理 --------------
 
 let handleSearch = () => {
+  // if (search.value === '') {
+  //   ElNotification({
+  //     title: '搜索内容不能为空',
+  //     message: '请输入搜索内容',
+  //     type: 'warning'
+  //   })
+  //   return;
+  // }
+  // loading.value = true
+  // router.push(`/materialSearch/${search.value}`)
+  // getMaterialListBySearch()
+  // loading.value = false
+
   if (search.value === '') {
-    ElNotification({
-      title: '搜索内容不能为空',
-      message: '请输入搜索内容',
-      type: 'warning'
-    })
-    return;
+    // 重置搜索而不是显示警告
+    isSearch.value = false; // 重置搜索状态
+    search.value = ''; // 确保搜索框为空
+    page.value = 1; // 可能需要重置分页到第一页
+    getChemistryList(); // 重新获取全部材料列表
+    getMaterialTotal(typeId.value); // 如果需要，也重新获取材料总数
+    // 不需要显示警告消息
+  } else {
+    loading.value = true;
+    router.push(`/materialSearch/${search.value}`);
+    getMaterialListBySearch(); // 进行搜索
+    loading.value = false;
   }
-  loading.value = true
-  router.push(`/materialSearch/${search.value}`)
-  getMaterialListBySearch()
-  loading.value = false
 }
 watch(typeId, () => {
   loading.value = true
@@ -118,6 +133,7 @@ watch(typeId, () => {
   loading.value = false
 })
 let loading = ref(true)
+
 async function getMaterialListBySearch() {
   loading.value = true
   let res = await getMaterialListPageBySearchApi(search.value, page.value, pageSize.value);
@@ -137,14 +153,15 @@ let itemList = defineModel('itemList');
     <el-container>
 
       <el-main>
-        <div v-loading="loading" class="chemistry-list" >
+        <div v-loading="loading" class="chemistry-list">
           <div class="search-input-background">
             <div class="search-input">
               <el-form label-position="top">
                 <el-form-item label="搜索材料...">
-                  <el-input v-model="search" placeholder="请输入关键词">
+                  <el-input v-model="search" placeholder="请输入材料名称、简称、分子式或者CAS号进行查询">
                     <template #append>
-                      <el-button @keydown.enter="handleSearch" @click="handleSearch" :icon="Search" style="width: 60px"></el-button>
+                      <el-button @keydown.enter="handleSearch" @click="handleSearch" :icon="Search"
+                                 style="width: 60px"></el-button>
                     </template>
                   </el-input>
                 </el-form-item>
@@ -158,7 +175,7 @@ let itemList = defineModel('itemList');
           </transition>
           <transition>
             <div>
-              <div  v-if="total!==0" class="total-show">
+              <div v-if="total!==0" class="total-show">
                 <el-text tag="b" style="text-align: center;margin-top: 20px ">
                   共{{ total }}条数据
                 </el-text>
@@ -182,7 +199,7 @@ let itemList = defineModel('itemList');
         </div>
       </el-main>
       <el-aside class="aside-nav">
-        <el-card header="材料导航" style="margin-top: 20px">
+        <el-card header="材料导航" class="nav-list" style="margin-top: 20px">
           <el-button size="large" style="margin-bottom: 5px" link v-for="i in itemList"
                      @click="router.push(`/materialList/${i.id}`)">
             <el-tag>{{ i['name'] }}</el-tag>
@@ -219,7 +236,18 @@ let itemList = defineModel('itemList');
 .aside-nav {
   width: 20%;
   margin-top: 20px;
-  margin-right: 10%;
+
+
+  .nav-list {
+
+    margin-right: 20px;
+    position: fixed;
+    z-index: 10;
+    transform: translate3d(0px, 100px, 0px);
+    top: 0px;
+    display: block;
+
+  }
 
   .el-card__header {
     font-size: 20px;
@@ -231,11 +259,19 @@ let itemList = defineModel('itemList');
   border-radius: 5px;
   margin: auto;
   width: 90%;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 1);
+
 
   .search-input-background {
     width: 100%;
     border-bottom: #20558a 2px solid;
+
+
+    background-color: #f1f1f1;
+    background: linear-gradient(rgba(214, 215, 217, .5), rgba(214, 215, 217, .5)), url("@/assets/indexPic/background.png"), #f1f1f1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
     .search-input {
       padding: 30px;

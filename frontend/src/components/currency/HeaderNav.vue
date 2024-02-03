@@ -1,7 +1,7 @@
 <script setup>
 import { ref,computed } from 'vue'
 import router from "@/routers/index.js";
-let logoText = ref('氟材料展示平台')
+let logoText = ref('氟材料数据展示平台')
 let typeList = defineModel()
 </script>
 
