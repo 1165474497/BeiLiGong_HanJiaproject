@@ -61,10 +61,14 @@ onMounted(() => {
       </el-aside>
       <el-main>
         <div v-loading="loading" class="material-info">
-
-          <el-descriptions v-if="data!==null" border :column="1">
-            <el-descriptions-item v-for="(v,k) in data" :label="v['name']+'('+k+')'">
-              <span style="width: 100%" v-for="i in v['value']">{{ i }}</span>
+          <el-descriptions v-if="data!=null" border :column="1" v-for="(v,k) in data" >
+            <template #title>
+              <el-text class="classification">
+                {{k}}
+              </el-text>
+            </template>
+            <el-descriptions-item v-for="(value,name) in v" :label="name">
+              <span v-for="i in value['value']">{{i}}</span>
             </el-descriptions-item>
           </el-descriptions>
           <el-empty v-else description="暂无数据"></el-empty>
@@ -85,6 +89,15 @@ onMounted(() => {
   background-color: rgba(255, 255, 255, 0.8);
 
   .el-descriptions__label {
+    font-weight: bold;
+    width: 20%;
+  }
+  .el-descriptions__title {
+    margin-top: 20px;
+  }
+  .classification{
+    margin-left: 10px;
+    font-size: 15px;
     font-weight: bold;
   }
 }
